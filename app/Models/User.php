@@ -3,40 +3,48 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Contracts\TraceableContract;
+use App\Observers\UserObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+#[ObservedBy(UserObserver::class)]
+class User extends Authenticatable implements TraceableContract
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    public function terminals(): HasMany
+    {
+        return $this->hasMany(Terminal::class);
+    }
+
+    public function traces(): MorphMany
+    {
+        return $this->morphMany(Trace::class, 'traceable');
+    }
+
+    public function links(): MorphToMany
+    {
+        return $this->morphToMany(Trace::class, 'linkable', 'trace_links')->withPivot('trace_link_type');
+    }
+
     protected function casts(): array
     {
         return [

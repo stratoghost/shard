@@ -1,0 +1,135 @@
+?? Associate a person with a log
+?? Associate a tag with a log
+?? Associate a person with a task
+?? Associate a tag with a task
+?? Associate a person with an absence
+?? Associate a tag with a holiday
+?? Associate an attachment with a log
+?? Associate a tag with an attachment
+
+---
+
+- Task -> Trace
+- Session -> Trace
+- TimeClock -> Trace
+- Snapshot -> Trace
+- Terminal -> Trace
+- Person -> Trace
+- Tags -> Trace
+- Holiday -> Trace
+- Absence -> Trace
+- Checklist -> Trace
+- ChecklistItem -> Trace
+
+- Terminal Logon -> Trace
+- Terminal Logoff -> Trace
+
+- When overtime -> Trace
+- When finishing under time -> Trace
+
+---
+
+- AbsencePolicy
+- AbsencePolicyTest
+
+- ContextPolicy
+- ContextPolicyTest
+
+- HolidayPolicy
+- HolidayPolicyTest
+
+- SessionPolicy
+- SessionPolicyTest
+
+- SnapshotPolicy
+- SnapshotPolicyTest
+
+- TerminalPolicy
+- TerminalPolicyTest
+
+- TimeClockPolicy
+- TimeClockPolicyTest
+
+- PersonPolicy
+- PersonPolicyTest
+
+- TagsPolicy
+- TagsPolicyTest
+
+- TasksPolicy
+- TasksPolicyTest
+
+
+---
+
+- Integrate: AbsencePolicy
+- Integration tests for AbsencePolicy
+
+- Integrate: ContextPolicy
+- Integration tests for ContextPolicy
+
+- Integrate: HolidayPolicy
+- Integration tests for HolidayPolicy
+
+- Integrate: SessionPolicy
+- Integration tests for SessionPolicy
+
+- Integrate: SnapshotPolicy
+- Integration tests for SnapshotPolicy
+
+- Integrate: TerminalPolicy
+- Integration tests for TerminalPolicy
+
+- Integrate: TimeClockPolicy
+- Integration tests for TimeClockPolicy
+
+- Integrate: PersonPolicy
+- Integration tests for PersonPolicy
+
+- Integrate: TagsPolicy
+- Integration tests for TagsPolicy
+
+- Integrate: TasksPolicy
+- Integration tests for TasksPolicy
+
+
+:::::::::::::::: Checklist makes more sense as a taskset, creates a set of tasks
+
+- Checklists
+- ChecklistsTest
+- ChecklistManagerService
+- ChecklistsManagerServiceTest
+
+- ChecklistItems
+- ChecklistItemsTest
+- ChecklistItemManagerService
+- ChecklistItemsManagerServiceTest
+
+?? Associate a Checklist Item with a Checklist
+
+
+- Integrate: ChecklistPolicy
+- Integration tests for ChecklistPolicy
+
+- Integrate: ChecklistItemPolicy
+- Integration tests for ChecklistItemPolicy
+
+- ChecklistPolicy
+- ChecklistPolicyTest
+
+- ChecklistItemPolicy
+- ChecklistItemPolicyTest
+
+::::::::::::::::::
+
+Track job happiness
+
+Violation
+ViolationTest
+ViolationManagerService
+ViolationManagerServiceTest
+
+Associate a person with a violation
+
+(When a violation occurs, it is logged, and it is recorded with negative points)
+(When a session is ended, and no violation occurred, it is logged, and it is recorded with positive points)
